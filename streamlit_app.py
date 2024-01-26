@@ -19,7 +19,7 @@ If the user asks to finish or add their recipies to the cart - reply with a foll
 
 Do not talk about anything other than culinary, food and recipies. Always respond in Russian language.
 '''
-client = OpenAI()
+client = OpenAI(api_key='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')
 
 def chat_page():    
     st.title("🚀 Добро пожаловать во ВкусоБот! 🚀")
