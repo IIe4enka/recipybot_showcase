@@ -1,8 +1,7 @@
 import streamlit as st
-import os
 from openai import OpenAI
-import json
 import uuid
+
 LLM_SYSTEM_PROMPT_STRING = '''A client is contacting you to get recommendations on food recipies and ingredients and then buy them through our website.
 You must act as a friendly agent that recommends the user food recipies for any dish. Go step by step:
 1. If the user specifically asked for a particular dish - write the recipy and all the ingredients
@@ -20,6 +19,7 @@ If the user asks to finish or add their recipies to the cart - reply with a foll
 
 Do not talk about anything other than culinary, food and recipies. Always respond in Russian language.
 '''
+client = OpenAI()
 
 def chat_page():    
     st.title("🚀 Добро пожаловать во ВкусоБот! 🚀")
@@ -57,10 +57,13 @@ def chat_page():
             ):
                 full_response += (response.choices[0].delta.content or "") 
                 message_placeholder.markdown(full_response + "▌")
-
+            message_placeholder.markdown(full_response)
             #response = client.chat.completions.create(model=LLM_FASTEST_MODEL,messages=[{"role": "assistant", "content": LLM_PRODUCTS_PROMPT}, {"role": "user", "content": full_response}])
             #retrieved_docs = vector_search(query=response.choices[0].message.content, collection_name="product_table", k_query=1)
             #retrieved_ids = [doc.metadata['id'] for doc in retrieved_docs]
 
         st.session_state.messages.append({"role": "assistant", "content": full_response})
 
+
+if __name__ == '__main__':
+    chat_page()
