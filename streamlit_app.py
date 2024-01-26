@@ -19,7 +19,6 @@ If the user asks to finish or add their recipies to the cart - reply with a foll
 
 Do not talk about anything other than culinary, food and recipies. Always respond in Russian language.
 '''
-client = OpenAI(api_key='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')
 
 def chat_page():    
     st.title("🚀 Добро пожаловать во ВкусоБот! 🚀")
@@ -28,6 +27,18 @@ def chat_page():
     st.caption("📜 Подбор Рецептов: Найдет идеальное блюдо на любой вкус и случай, основываясь на ваших предпочтениях и имеющихся продуктах!")
     st.caption("🛒 Список Покупок: Создаст для вас список необходимых ингредиентов и поможет их заказать с доставкой прямо на ваш порог!")
     st.caption("🍲 Кулинарные Советы: Поделится хитростями и секретами приготовления, помогая стать настоящим шеф-поваром у себя дома!")
+
+    if "api_key" not in st.session_state:
+        st.session_state.api_key = ""
+
+    with st.sidebar:
+        st.session_state.api_key = st.text_input("Введите ваш OpenAI API Key:")
+
+    if st.session_state.api_key:
+        client = OpenAI(api_key=st.session_state.api_key)
+
+    else:
+        st.warning("Пожалуйста, введите ваш OpenAI API Key для начала работы с ВкусоБот.")
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
