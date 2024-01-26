@@ -33,6 +33,10 @@ def chat_page():
 
     with st.sidebar:
         st.session_state.api_key = st.text_input("Введите ваш OpenAI API Key:")
+        
+        if st.button("Очистить историю чата"):
+            st.session_state.messages = []
+
 
     if st.session_state.api_key:
         client = OpenAI(api_key=st.session_state.api_key)
