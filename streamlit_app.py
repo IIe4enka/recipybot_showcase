@@ -66,7 +66,7 @@ def chat_page():
             openai_msgs.append({"role": "system", "content": LLM_SYSTEM_PROMPT_STRING})
             # openai_msgs.append({"role": "system", "content": retrieved_data})
             for response in client.chat.completions.create(
-                model='gpt-4-1106-preview',
+                model='gpt-3.5-turbo-1106',
                 messages=openai_msgs,
                 stream=True,
             ):
