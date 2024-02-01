@@ -64,10 +64,10 @@ def chat_page():
             message_placeholder = st.empty()
             full_response = ""
             openai_msgs = [{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]
-            openai_msgs.append({"role": "system", "content": LLM_SMARTEST_MODEL})
+            openai_msgs.append({"role": "system", "content": LLM_SYSTEM_PROMPT_STRING})
             # openai_msgs.append({"role": "system", "content": retrieved_data})
             for response in client.chat.completions.create(
-                model='gpt-3.5-turbo-1106',
+                model='gpt-4-0125-preview',
                 messages=openai_msgs,
                 stream=True,
             ):
